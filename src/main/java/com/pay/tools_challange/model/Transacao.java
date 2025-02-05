@@ -22,9 +22,6 @@ public class Transacao {
     @Embedded
     private FormaPagamento formaPagamento;
 
-    @NotBlank
-    private StatusTransacao status;
-
     public UUID getId() {
         return id;
     }
@@ -55,14 +52,6 @@ public class Transacao {
 
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
-    }
-
-    public StatusTransacao getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusTransacao status) {
-        this.status = status;
     }
 
 }
