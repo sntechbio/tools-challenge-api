@@ -14,4 +14,19 @@ public class FormaPagamento {
     @NotBlank(message = "O campo quantidade de parcelas é obrigatório")
     private String parcelas;
 
+    public TipoPagamento getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoPagamento tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getParcelas() {
+        return parcelas;
+    }
+
+    public void setParcelas(String parcelas) {
+        this.parcelas = parcelas;
+    }
 }

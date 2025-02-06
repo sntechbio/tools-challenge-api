@@ -1,6 +1,4 @@
 package com.pay.tools_challange.model;
-
-import com.pay.tools_challange.enums.StatusTransacao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
