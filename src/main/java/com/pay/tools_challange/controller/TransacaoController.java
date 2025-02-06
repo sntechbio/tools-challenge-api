@@ -6,12 +6,10 @@ import com.pay.tools_challange.model.Transacao;
 import com.pay.tools_challange.service.TransacaoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/api/v1/payment")
+@RestController
+@RequestMapping("/api/payment")
 public class TransacaoController {
 
     private final TransacaoService transacaoService;
@@ -26,6 +24,11 @@ public class TransacaoController {
     @PostMapping
     public void solicitarPagamento(@RequestBody @Valid TransacaoDTO transacaoDTO) {
         Transacao transacao = transacaoAssembler.toEntity(transacaoDTO);
+    }
+
+    @GetMapping("hello")
+    public String hello() {
+        return "Hello World!";
     }
 
 }
