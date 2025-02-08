@@ -2,11 +2,11 @@ package com.pay.tools_challange.controller;
 
 import com.pay.tools_challange.assembler.TransacaoAssembler;
 import com.pay.tools_challange.dto.PagamentoDTO;
-import com.pay.tools_challange.enums.StatusTransacao;
+import com.pay.tools_challange.dto.TransacaoDTO;
 import com.pay.tools_challange.model.Transacao;
 import com.pay.tools_challange.service.TransacaoService;
-import com.pay.tools_challange.utils.IndentifyGenerator;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,15 +23,11 @@ public class TransacaoController {
     }
 
     @PostMapping
-    public void solicitarPagamento(@RequestBody @Valid PagamentoDTO pagamento) {
+    public ResponseEntity<TransacaoDTO> solicitarPagamento(@RequestBody @Valid PagamentoDTO pagamento) {
         Transacao transacao = transacaoAssembler.toEntity(pagamento.transacao());
         transacao = transacaoService.autorizar(transacao);
-        transacaoService.salvar(transacao);
-    }
-
-    @GetMapping("hello")
-    public String hello() {
-        return "Hello World!";
+        Transacao transacaoSalva = transacaoService.salvar(transacao);
+        return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoSalva));
     }
 
 }

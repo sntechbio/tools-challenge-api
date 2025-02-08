@@ -11,6 +11,7 @@ public record FormaPagamentoDTO(
         @NotNull(message = "O tipo de pagamento deve ser preenchido")
         TipoPagamento tipo,
 
+        @NotBlank(message = "O campo quantidade de parcelas deve ser preenchido")
         String parcelas
 ) {
 }

@@ -8,6 +8,8 @@ public record TransacaoDTO(
         @NotBlank(message = "O campo cartão é obrigatório")
         String cartao,
 
+        String id,
+
         @Valid
         DescricaoDTO descricao,
 

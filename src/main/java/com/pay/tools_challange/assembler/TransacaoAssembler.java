@@ -14,10 +14,14 @@ public class TransacaoAssembler {
     public TransacaoDTO toDTO(Transacao transacao) {
         return new TransacaoDTO(
                 transacao.getCartao(),
+                transacao.getId().toString(),
                 new DescricaoDTO(
                         transacao.getDescricao().getValor(),
                         transacao.getDescricao().getDataHora(),
-                        transacao.getDescricao().getEstabelecimento()
+                        transacao.getDescricao().getEstabelecimento(),
+                        transacao.getDescricao().getNsu(),
+                        transacao.getDescricao().getCodigoAutorizacao(),
+                        transacao.getDescricao().getStatus()
                 ),
                 new FormaPagamentoDTO(
                         transacao.getFormaPagamento().getTipo(),
