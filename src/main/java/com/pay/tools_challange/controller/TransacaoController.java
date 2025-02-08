@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/payment")
 public class TransacaoController {
@@ -28,6 +30,12 @@ public class TransacaoController {
         transacao = transacaoService.autorizar(transacao);
         Transacao transacaoSalva = transacaoService.salvar(transacao);
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoSalva));
+    }
+
+    @PostMapping("/estorno/{id}")
+    public ResponseEntity<TransacaoDTO> estornarPagamento(@PathVariable String id) {
+        Transacao transacao = transacaoService.buscarPorId(UUID.fromString(id));
+        return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoService.estornar(transacao)));
     }
 
 }

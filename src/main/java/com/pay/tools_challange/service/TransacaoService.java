@@ -1,11 +1,13 @@
 package com.pay.tools_challange.service;
 
 import com.pay.tools_challange.enums.StatusTransacao;
+import com.pay.tools_challange.exception.TransacaoCanceladaException;
 import com.pay.tools_challange.exception.TransacaoNaoEncontradaException;
 import com.pay.tools_challange.model.Transacao;
 import com.pay.tools_challange.repository.TransacaoRepository;
 import com.pay.tools_challange.utils.IndentifyGenerator;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -31,11 +33,25 @@ public class TransacaoService {
         return transacao;
     }
 
+    @Transactional
+    public Transacao estornar(Transacao transacao) {
+        validarTransacaoEstorno(transacao);
+        transacao.getDescricao().setStatus(StatusTransacao.CANCELADO);
+
+        return transacao;
+    }
+
     public Transacao buscarPorId(UUID id) {
         return repository.findById(id).orElseThrow(() -> new TransacaoNaoEncontradaException("Transação não encontrada"));
     }
 
-    public List<Transacao> listarTodas() {
+    private void validarTransacaoEstorno(Transacao transacao) {
+        if (transacao.getDescricao().getStatus().equals(StatusTransacao.CANCELADO)) {
+            throw new TransacaoCanceladaException("Essa transação já se encontra cancelada.", transacao.getId().toString());
+        }
+    }
+
+    public List<Transacao> listar() {
         return repository.findAll();
     }
 
