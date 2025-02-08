@@ -5,7 +5,7 @@ import com.pay.tools_challange.exception.TransacaoCanceladaException;
 import com.pay.tools_challange.exception.TransacaoNaoEncontradaException;
 import com.pay.tools_challange.model.Transacao;
 import com.pay.tools_challange.repository.TransacaoRepository;
-import com.pay.tools_challange.utils.IndentifyGenerator;
+import com.pay.tools_challange.utils.IdentifyGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +26,8 @@ public class TransacaoService {
     }
 
     public Transacao autorizar(Transacao transacao) {
-        transacao.getDescricao().setNsu(IndentifyGenerator.sequencialCodeGenerator());
-        transacao.getDescricao().setCodigoAutorizacao(IndentifyGenerator.sequencialCodeGenerator());
+        transacao.getDescricao().setNsu(IdentifyGenerator.sequencialCodeGenerator());
+        transacao.getDescricao().setCodigoAutorizacao(IdentifyGenerator.sequencialCodeGenerator());
         transacao.getDescricao().setStatus(StatusTransacao.AUTORIZADO);
 
         return transacao;

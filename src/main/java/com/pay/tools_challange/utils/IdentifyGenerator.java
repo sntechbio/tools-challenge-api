@@ -2,7 +2,7 @@ package com.pay.tools_challange.utils;
 
 import java.util.Random;
 
-public class IndentifyGenerator {
+public class IdentifyGenerator {
 
     public static String sequencialCodeGenerator() {
         Random random = new Random();
