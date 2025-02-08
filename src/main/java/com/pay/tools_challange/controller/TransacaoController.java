@@ -5,6 +5,7 @@ import com.pay.tools_challange.dto.PagamentoDTO;
 import com.pay.tools_challange.model.Transacao;
 import com.pay.tools_challange.service.TransacaoService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class TransacaoController {
         Transacao transacao = transacaoAssembler.toEntity(pagamento.transacao());
         transacao = transacaoService.autorizar(transacao);
         Transacao transacaoSalva = transacaoService.salvar(transacao);
-        return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoSalva));
+        return ResponseEntity.status(HttpStatus.CREATED).body(transacaoAssembler.toDTO(transacaoSalva));
     }
 
     @PostMapping("/{id}/estorno")
