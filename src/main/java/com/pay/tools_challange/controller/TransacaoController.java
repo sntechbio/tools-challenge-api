@@ -52,8 +52,8 @@ public class TransacaoController {
     }
 
     @GetMapping("/listar")
-    public List<PagamentoDTO> listar() {
-        return transacaoAssembler.toCollectionModel(transacaoService.listar());
+    public ResponseEntity<List<PagamentoDTO>> listar() {
+        return ResponseEntity.ok().body(transacaoAssembler.toCollectionModel(transacaoService.listar()));
     }
 
 }
