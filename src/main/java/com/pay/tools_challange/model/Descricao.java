@@ -2,6 +2,8 @@ package com.pay.tools_challange.model;
 
 import com.pay.tools_challange.enums.StatusTransacao;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +22,7 @@ public class Descricao {
 
     private String codigoAutorizacao;
 
+    @Enumerated(EnumType.STRING)
     private StatusTransacao status;
 
     @NotBlank(message = "O campo estabelecimento é obrigatório")

@@ -30,13 +30,13 @@ public class TransacaoAssembler {
         Transacao transacao = new Transacao();
 
         Descricao descricao = new Descricao();
-        descricao.setValor(transacaoDTO.descricaoDTO().valor());
-        descricao.setEstabelecimento(transacaoDTO.descricaoDTO().estabelecimento());
-        descricao.setDataHora(transacaoDTO.descricaoDTO().dataHora());
+        descricao.setValor(transacaoDTO.descricao().valor());
+        descricao.setEstabelecimento(transacaoDTO.descricao().estabelecimento());
+        descricao.setDataHora(transacaoDTO.descricao().dataHora());
 
         FormaPagamento formaPagamento = new FormaPagamento();
-        formaPagamento.setTipo(transacaoDTO.formaPagamentoDTO().tipoPagamento());
-        formaPagamento.setParcelas(transacaoDTO.formaPagamentoDTO().parcelas());
+        formaPagamento.setTipo(transacaoDTO.formaPagamento().tipo());
+        formaPagamento.setParcelas(transacaoDTO.formaPagamento().parcelas());
 
         transacao.setCartao(transacaoDTO.cartao());
         transacao.setDescricao(descricao);

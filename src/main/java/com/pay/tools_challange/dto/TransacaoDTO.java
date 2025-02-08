@@ -9,12 +9,10 @@ public record TransacaoDTO(
         String cartao,
 
         @Valid
-        @NotBlank
-        DescricaoDTO descricaoDTO,
+        DescricaoDTO descricao,
 
         @Valid
-        @NotBlank
-        FormaPagamentoDTO formaPagamentoDTO
+        FormaPagamentoDTO formaPagamento
 
 ) {
 }
