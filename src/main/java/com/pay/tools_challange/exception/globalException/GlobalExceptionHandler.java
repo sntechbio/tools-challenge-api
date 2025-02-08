@@ -45,7 +45,6 @@ public class GlobalExceptionHandler {
         body.put("status", HttpStatus.NOT_FOUND.value());
         body.put("error", "Not Found");
         body.put("message", ex.getMessage());
-        body.put("path", "/api/payment/estorno");
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
@@ -57,7 +56,6 @@ public class GlobalExceptionHandler {
         body.put("status", HttpStatus.CONFLICT.value());
         body.put("error", "Conflict");
         body.put("message", ex.getMessage());
-        body.put("path", "/api/payment/estorno");
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }

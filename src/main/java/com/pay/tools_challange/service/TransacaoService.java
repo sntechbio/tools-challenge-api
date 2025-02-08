@@ -47,9 +47,9 @@ public class TransacaoService {
         return repository.findById(id).orElseThrow(() -> new TransacaoNaoEncontradaException("Transação não encontrada"));
     }
 
-    public Transacao buscarEstorno(UUID id) {
-        return transacaoRepository.findByIdAndStatus(id, StatusTransacao.CANCELADO.toString())
-                .orElseThrow( () -> new TransacaoNaoEncontradaException("Estorno não encontrado para o id selecionado", id.toString()));
+    public Transacao buscarEstorno(String id) {
+        return transacaoRepository.findByIdAndStatus(UUID.fromString(id), StatusTransacao.CANCELADO)
+                .orElseThrow( () -> new TransacaoNaoEncontradaException("Estorno não encontrado para o id selecionado", id));
     }
 
     private void validarTransacaoEstorno(Transacao transacao) {

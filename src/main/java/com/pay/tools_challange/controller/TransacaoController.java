@@ -40,7 +40,7 @@ public class TransacaoController {
 
     @GetMapping("/estorno/{id}")
     public ResponseEntity<TransacaoDTO> buscarEstornoPorId(@PathVariable String id) {
-        Transacao transacao = transacaoService.buscarEstorno(UUID.fromString(id));
+        Transacao transacao = transacaoService.buscarEstorno(id);
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacao));
     }
 
