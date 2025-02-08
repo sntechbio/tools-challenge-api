@@ -16,9 +16,11 @@ import java.util.UUID;
 public class TransacaoService {
 
     private final TransacaoRepository repository;
+    private final TransacaoRepository transacaoRepository;
 
-    public TransacaoService(TransacaoRepository repository) {
+    public TransacaoService(TransacaoRepository repository, TransacaoRepository transacaoRepository) {
         this.repository = repository;
+        this.transacaoRepository = transacaoRepository;
     }
 
     public Transacao salvar(Transacao transacao) {
@@ -41,8 +43,13 @@ public class TransacaoService {
         return transacao;
     }
 
-    public Transacao buscarPorId(UUID id) {
+    public Transacao buscarTransacao(UUID id) {
         return repository.findById(id).orElseThrow(() -> new TransacaoNaoEncontradaException("Transação não encontrada"));
+    }
+
+    public Transacao buscarEstorno(UUID id) {
+        return transacaoRepository.findByIdAndStatus(id, StatusTransacao.CANCELADO.toString())
+                .orElseThrow( () -> new TransacaoNaoEncontradaException("Estorno não encontrado para o id selecionado", id.toString()));
     }
 
     private void validarTransacaoEstorno(Transacao transacao) {

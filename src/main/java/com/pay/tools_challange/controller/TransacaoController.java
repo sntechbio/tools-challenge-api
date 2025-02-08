@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/payment")
+@RequestMapping("/api/pagamento")
 public class TransacaoController {
 
     private final TransacaoService transacaoService;
@@ -32,10 +32,16 @@ public class TransacaoController {
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoSalva));
     }
 
-    @PostMapping("/estorno/{id}")
+    @PostMapping("/{id}/estorno")
     public ResponseEntity<TransacaoDTO> estornarPagamento(@PathVariable String id) {
-        Transacao transacao = transacaoService.buscarPorId(UUID.fromString(id));
+        Transacao transacao = transacaoService.buscarTransacao(UUID.fromString(id));
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoService.estornar(transacao)));
+    }
+
+    @GetMapping("/estorno/{id}")
+    public ResponseEntity<TransacaoDTO> buscarEstornoPorId(@PathVariable String id) {
+        Transacao transacao = transacaoService.buscarEstorno(UUID.fromString(id));
+        return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacao));
     }
 
 }
