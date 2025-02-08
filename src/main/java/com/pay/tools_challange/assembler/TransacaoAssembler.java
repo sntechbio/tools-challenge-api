@@ -2,6 +2,7 @@ package com.pay.tools_challange.assembler;
 
 import com.pay.tools_challange.dto.DescricaoDTO;
 import com.pay.tools_challange.dto.FormaPagamentoDTO;
+import com.pay.tools_challange.dto.PagamentoDTO;
 import com.pay.tools_challange.dto.TransacaoDTO;
 import com.pay.tools_challange.model.Descricao;
 import com.pay.tools_challange.model.FormaPagamento;
@@ -15,18 +16,8 @@ public class TransacaoAssembler {
         return new TransacaoDTO(
                 transacao.getCartao(),
                 transacao.getId().toString(),
-                new DescricaoDTO(
-                        transacao.getDescricao().getValor(),
-                        transacao.getDescricao().getDataHora(),
-                        transacao.getDescricao().getEstabelecimento(),
-                        transacao.getDescricao().getNsu(),
-                        transacao.getDescricao().getCodigoAutorizacao(),
-                        transacao.getDescricao().getStatus()
-                ),
-                new FormaPagamentoDTO(
-                        transacao.getFormaPagamento().getTipo(),
-                        transacao.getFormaPagamento().getParcelas()
-                )
+                toDescricaoDTO(transacao),
+                toFormaPagamentoDTO(transacao)
         );
     }
 
@@ -47,6 +38,24 @@ public class TransacaoAssembler {
         transacao.setFormaPagamento(formaPagamento);
 
         return transacao;
+    }
+
+    private FormaPagamentoDTO toFormaPagamentoDTO(Transacao transacao) {
+        return new FormaPagamentoDTO(
+                transacao.getFormaPagamento().getTipo(),
+                transacao.getFormaPagamento().getParcelas()
+        );
+    }
+
+    private DescricaoDTO toDescricaoDTO(Transacao transacao) {
+        return new DescricaoDTO(
+                transacao.getDescricao().getValor(),
+                transacao.getDescricao().getDataHora(),
+                transacao.getDescricao().getEstabelecimento(),
+                transacao.getDescricao().getNsu(),
+                transacao.getDescricao().getCodigoAutorizacao(),
+                transacao.getDescricao().getStatus()
+        );
     }
 
 }
