@@ -62,8 +62,4 @@ public class TransacaoService {
         return repository.findAll();
     }
 
-    public void deletar(UUID id) {
-        repository.deleteById(id);
-    }
-
 }
