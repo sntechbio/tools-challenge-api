@@ -38,6 +38,12 @@ public class TransacaoController {
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoService.estornar(transacao)));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PagamentoDTO> buscarPorId(@PathVariable String id) {
+        Transacao transacao = transacaoService.buscarTransacao(UUID.fromString(id));
+        return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacao));
+    }
+
     @GetMapping("/estorno/{id}")
     public ResponseEntity<PagamentoDTO> buscarEstornoPorId(@PathVariable String id) {
         Transacao transacao = transacaoService.buscarEstorno(id);
