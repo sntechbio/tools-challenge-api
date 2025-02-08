@@ -16,11 +16,9 @@ import java.util.UUID;
 public class TransacaoServiceImpl implements TransacaoService {
 
     private final TransacaoRepository repository;
-    private final TransacaoRepository transacaoRepository;
 
-    public TransacaoServiceImpl(TransacaoRepository repository, TransacaoRepository transacaoRepository) {
+    public TransacaoServiceImpl(TransacaoRepository repository) {
         this.repository = repository;
-        this.transacaoRepository = transacaoRepository;
     }
 
     public Transacao salvar(Transacao transacao) {
@@ -48,7 +46,7 @@ public class TransacaoServiceImpl implements TransacaoService {
     }
 
     public Transacao buscarEstorno(String id) {
-        return transacaoRepository.findByIdAndStatus(UUID.fromString(id), StatusTransacao.CANCELADO)
+        return repository.findByIdAndStatus(UUID.fromString(id), StatusTransacao.CANCELADO)
                 .orElseThrow( () -> new TransacaoNaoEncontradaException("Estorno não encontrado para o id selecionado", id));
     }
 
@@ -56,7 +54,7 @@ public class TransacaoServiceImpl implements TransacaoService {
         return repository.findAll();
     }
 
-    private void validarTransacaoEstorno(Transacao transacao) {
+    public void validarTransacaoEstorno(Transacao transacao) {
         if (transacao.getDescricao().getStatus().equals(StatusTransacao.CANCELADO)) {
             throw new TransacaoCanceladaException("Essa transação já se encontra cancelada.", transacao.getId().toString());
         }
