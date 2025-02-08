@@ -25,7 +25,7 @@ public class TransacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<TransacaoDTO> solicitarPagamento(@RequestBody @Valid PagamentoDTO pagamento) {
+    public ResponseEntity<PagamentoDTO> solicitarPagamento(@RequestBody @Valid PagamentoDTO pagamento) {
         Transacao transacao = transacaoAssembler.toEntity(pagamento.transacao());
         transacao = transacaoService.autorizar(transacao);
         Transacao transacaoSalva = transacaoService.salvar(transacao);
@@ -33,13 +33,13 @@ public class TransacaoController {
     }
 
     @PostMapping("/{id}/estorno")
-    public ResponseEntity<TransacaoDTO> estornarPagamento(@PathVariable String id) {
+    public ResponseEntity<PagamentoDTO> estornarPagamento(@PathVariable String id) {
         Transacao transacao = transacaoService.buscarTransacao(UUID.fromString(id));
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacaoService.estornar(transacao)));
     }
 
     @GetMapping("/estorno/{id}")
-    public ResponseEntity<TransacaoDTO> buscarEstornoPorId(@PathVariable String id) {
+    public ResponseEntity<PagamentoDTO> buscarEstornoPorId(@PathVariable String id) {
         Transacao transacao = transacaoService.buscarEstorno(id);
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacao));
     }

@@ -12,13 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class TransacaoAssembler {
 
-    public TransacaoDTO toDTO(Transacao transacao) {
-        return new TransacaoDTO(
+    public PagamentoDTO toDTO(Transacao transacao) {
+        TransacaoDTO transacaoDTO = new TransacaoDTO(
                 transacao.getCartao(),
                 transacao.getId().toString(),
                 toDescricaoDTO(transacao),
                 toFormaPagamentoDTO(transacao)
         );
+
+        return new PagamentoDTO(transacaoDTO);
     }
 
     public Transacao toEntity(TransacaoDTO transacaoDTO) {
