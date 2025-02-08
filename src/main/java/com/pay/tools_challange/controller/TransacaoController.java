@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/pagamento")
+@RequestMapping("/api/v1/pagamento")
 public class TransacaoController {
 
     private final TransacaoService transacaoService;
