@@ -39,7 +39,7 @@ public class TransacaoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PagamentoDTO> buscarPorId(@PathVariable String id) {
+    public ResponseEntity<PagamentoDTO> buscarPagamentoPorId(@PathVariable String id) {
         Transacao transacao = transacaoService.buscarTransacao(UUID.fromString(id));
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacao));
     }
