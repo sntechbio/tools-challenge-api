@@ -9,6 +9,8 @@ import com.pay.tools_challange.model.FormaPagamento;
 import com.pay.tools_challange.model.Transacao;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class TransacaoAssembler {
 
@@ -40,6 +42,10 @@ public class TransacaoAssembler {
         transacao.setFormaPagamento(formaPagamento);
 
         return transacao;
+    }
+
+    public List<PagamentoDTO> toCollectionModel(List<Transacao> transacoes) {
+        return transacoes.stream().map(this::toDTO).toList();
     }
 
     private FormaPagamentoDTO toFormaPagamentoDTO(Transacao transacao) {

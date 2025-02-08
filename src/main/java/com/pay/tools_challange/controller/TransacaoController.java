@@ -2,13 +2,13 @@ package com.pay.tools_challange.controller;
 
 import com.pay.tools_challange.assembler.TransacaoAssembler;
 import com.pay.tools_challange.dto.PagamentoDTO;
-import com.pay.tools_challange.dto.TransacaoDTO;
 import com.pay.tools_challange.model.Transacao;
 import com.pay.tools_challange.service.TransacaoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,6 +42,11 @@ public class TransacaoController {
     public ResponseEntity<PagamentoDTO> buscarEstornoPorId(@PathVariable String id) {
         Transacao transacao = transacaoService.buscarEstorno(id);
         return ResponseEntity.ok().body(transacaoAssembler.toDTO(transacao));
+    }
+
+    @GetMapping("/listar")
+    public List<PagamentoDTO> listar() {
+        return transacaoAssembler.toCollectionModel(transacaoService.listar());
     }
 
 }
