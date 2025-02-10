@@ -28,7 +28,6 @@ public class Descricao {
     @NotBlank(message = "O campo estabelecimento é obrigatório")
     private String estabelecimento;
 
-    @CreationTimestamp
     private LocalDateTime dataHora;
 
     @UpdateTimestamp
